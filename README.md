@@ -851,62 +851,61 @@ def max_value(list_attributes):</br>
 def transform_attribute(attr, max_attr, min_attr):</br>
 	nilai_transformasi = (attr - min_attr) / (max_attr - min_attr)</br>
 	return nilai_transformasi</br>
-# STEP 5:</br>
-# Buat fungsi data_transformation yang menerima parameter list_of_dictionary </br>
-# (sebuah list yang berisikan tipe data dictionary) dan list_attribute_names </br>
-# (sebuah list yang berisikan tipe data string) mengembalikan hasil </br>
-# transformasi data dari list_of_dictionary berdasarkan list_attribute_names </br>
-# dan attr_info telah dispesifikasikan.
-def data_transformation(list_of_dictionary, list_attribute_names):
-	attr_info = {}
-	for attr_name in list_attribute_names:
-		specified_attributes = get_all_specified_attributes(list_of_dictionary, attr_name)
-		max_attr = max_value(specified_attributes)
-		min_attr = min_value(specified_attributes)
-		attr_info[attr_name] = {'max': max_attr, 'min': min_attr}
-		data_idx = 0
-		while(data_idx < len(list_of_dictionary)):
-			list_of_dictionary[data_idx][attr_name] = transform_attribute(int(list_of_dictionary[data_idx][attr_name]), max_attr, min_attr)
-			data_idx += 1
-	return list_of_dictionary, attr_info
-# STEP 6:
-# Berdasarkan data baru dan attr_info ini, buat fungsi transform_data yang
-# menerima parameter data dan attr_info dan mengembalikan nilai atribut 
-# dari data baru yang telah ditransformasikan.
-def transform_data(data, attr_info):
-	for key_name in data.keys():
-		data[key_name] = (data[key_name] - attr_info[key_name]['min']) / (
-		                  attr_info[key_name]['max'] - attr_info[key_name]['min'])
-	return data
-# STEP 7:
-# Buat fungsi yang digunakan untuk sistem prediksi harga berdasarkan 
-# nilai kemiripan atribut, yaitu argument input data dan list_of_data!
-def abs_value(value):
-	if value < 0:
-		return -value
-	else:
-		return value
-def price_based_on_similarity(data, list_of_data):
-	prediksi_harga = 0
-	perbedaan_terkecil = 999
-	for data_point in list_of_data:
-		perbedaan= abs_value(data['tanah'] - data_point['tanah'])
-		perbedaan+= abs_value(data['bangunan'] - data_point['bangunan'])
-		perbedaan+= abs_value(data['jarak_ke_pusat'] - data_point['jarak_ke_pusat'])
-		if perbedaan < perbedaan_terkecil:
-			prediksi_harga = data_point['harga']
-			perbedaan_terkecil = perbedaan
-	return prediksi_harga
-# STEP 8:
-# Hitung harga rumah yang telah ditransformasikan ke dalam variabel 
-# harga_rumah berikut dengan atributnya attr_info
-harga_rumah, attr_info = data_transformation(harga_rumah,
-											 ['tanah','bangunan','jarak_ke_pusat'])
-# Gunakan variabel data untuk memprediksi harga rumah
-data = {'tanah': 110, 'bangunan': 80, 'jarak_ke_pusat': 35}
-# Transformasikan data tersebut dengan dengan menggunakan attr_info yang telah 
-# diperoleh yang kembali disimpan ke variabel data.
-data = transform_data(data, attr_info)
-# Hitunglah prediksi harga dari variabel data tersebut.
-harga = price_based_on_similarity(data, harga_rumah)
-print("Prediksi harga rumah: ", harga)
+#STEP 5:</br>
+#Buat fungsi data_transformation yang menerima parameter list_of_dictionary </br>
+#(sebuah list yang berisikan tipe data dictionary) dan list_attribute_names </br>
+#(sebuah list yang berisikan tipe data string) mengembalikan hasil </br>
+#transformasi data dari list_of_dictionary berdasarkan list_attribute_names </br>
+#dan attr_info telah dispesifikasikan.</br>
+def data_transformation(list_of_dictionary, list_attribute_names):</br>
+	attr_info = {}</br>
+	for attr_name in list_attribute_names:</br>
+		specified_attributes = get_all_specified_attributes(list_of_dictionary, attr_name)</br>
+		max_attr = max_value(specified_attributes)</br>
+		min_attr = min_value(specified_attributes)</br>
+		attr_info[attr_name] = {'max': max_attr, 'min': min_attr}</br>
+		data_idx = 0</br>
+		while(data_idx < len(list_of_dictionary)):</br>
+			list_of_dictionary[data_idx][attr_name] = transform_attribute(int(list_of_dictionary[data_idx][attr_name]), max_attr, min_attr)</br>
+			data_idx += 1</br>
+	return list_of_dictionary, attr_info</br>
+#STEP 6:</br>
+#Berdasarkan data baru dan attr_info ini, buat fungsi transform_data yang</br>
+#menerima parameter data dan attr_info dan mengembalikan nilai atribut </br>
+#dari data baru yang telah ditransformasikan.</br>
+def transform_data(data, attr_info):</br>
+	for key_name in data.keys():</br>
+		data[key_name] = (data[key_name] - attr_info[key_name]['min']) / (</br>
+		                  attr_info[key_name]['max'] - attr_info[key_name]['min'])</br>
+	return data</br>
+#STEP 7:</br>
+#Buat fungsi yang digunakan untuk sistem prediksi harga berdasarkan </br>
+#nilai kemiripan atribut, yaitu argument input data dan list_of_data!</br>
+def abs_value(value):</br>
+	if value < 0:</br>
+		return -value</br>
+	else:</br>
+		return value</br>
+def price_based_on_similarity(data, list_of_data):</br>
+	prediksi_harga = 0</br>
+	perbedaan_terkecil = 999</br>
+	for data_point in list_of_data:</br>
+		perbedaan= abs_value(data['tanah'] - data_point['tanah'])</br>
+		perbedaan+= abs_value(data['bangunan'] - data_point['bangunan'])</br>
+		perbedaan+= abs_value(data['jarak_ke_pusat'] - data_point['jarak_ke_pusat'])</br>
+		if perbedaan < perbedaan_terkecil:</br>
+			prediksi_harga = data_point['harga']</br>
+			perbedaan_terkecil = perbedaan</br>
+	return prediksi_harga</br>
+#STEP 8:</br>
+#Hitung harga rumah yang telah ditransformasikan ke dalam variabel </br>
+#harga_rumah berikut dengan atributnya attr_info</br>
+harga_rumah, attr_info = data_transformation(harga_rumah,['tanah','bangunan','jarak_ke_pusat'])</br>
+#Gunakan variabel data untuk memprediksi harga rumah</br>
+data = {'tanah': 110, 'bangunan': 80, 'jarak_ke_pusat': 35}</br>
+#Transformasikan data tersebut dengan dengan menggunakan attr_info yang telah </br>
+#diperoleh yang kembali disimpan ke variabel data.</br>
+data = transform_data(data, attr_info)</br>
+#Hitunglah prediksi harga dari variabel data tersebut.</br>
+harga = price_based_on_similarity(data, harga_rumah)</br>
+print("Prediksi harga rumah: ", harga)</br>
