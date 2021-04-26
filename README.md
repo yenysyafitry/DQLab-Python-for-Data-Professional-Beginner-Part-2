@@ -911,4 +911,4 @@ harga = price_based_on_similarity(data, harga_rumah)</br>
 print("Prediksi harga rumah: ", harga)</br>
 
 </br>
-<p align="center"><b>E-Sertifikat </b></br><img src="https://github.com/yenysyafitry/DQLab-Python-for-Data-Professional-Beginner/blob/main/e-sertifikat.jpg"></p>
+<p align="center"><b>E-Sertifikat </b></br><img src="https://github.com/yenysyafitry/DQLab-Python-for-Data-Professional-Beginner-Part-2/blob/main/e-sertifikat.jpg"></p>
